@@ -52,6 +52,13 @@ Pull requests are welcome! If you’d like to improve the app or add new feature
 
 For questions, suggestions, or collaborations, feel free to reach out via GitHub issues or connect directly.
 
+---
+
+
+## Screenshots
+
+
+<img src="assets/screenshots/startpage.jpeg" alt="Start Screen" width="300" height="620"/>      <img src="assets/screenshots/dreamdesc.jpeg" alt="Start Screen" width="300" height="620"/>      <img src="assets/screenshots/story.jpeg" alt="Start Screen" width="300" height="620"/>      <img src="assets/screenshots/tee.jpeg" alt="Start Screen" width="300" height="620"/>      <img src="assets/screenshots/paths.jpeg" alt="Start Screen" width="300" height="620"/>      <img src="assets/screenshots/tasks.jpeg" alt="Start Screen" width="300" height="620"/>      
 
 
 
