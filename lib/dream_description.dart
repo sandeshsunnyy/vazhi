@@ -47,105 +47,106 @@ class _DreamDescriptionState extends State<DreamDescription> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          color: Color(0xFFE2E0C8),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 60.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 20.0),
-                child: Text(
-                  'What do you dream of?',
-                  style: kDefaultTextStyle.copyWith(fontSize: 40.0, color: Colors.blueGrey[400]),
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            color: Color(0xFFE2E0C8),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 60.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 20.0),
+                  child: Text(
+                    'What do you dream of?',
+                    style: kDefaultTextStyle.copyWith(fontSize: 40.0, color: Colors.blueGrey[400]),
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 50.0,
-              ),
-              Column(
-                children: [
-                  TextField(
-                    controller: textEditor,
-                    maxLines: 12,
-                    style: kDefaultTextStyle.copyWith(color: Colors.black54),
-                    keyboardType: TextInputType.multiline,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      hintStyle:
-                          kDefaultTextStyle.copyWith(color: Colors.black54,),
-                      hintText:
-                          'describe your dream job, dream place, your dream everything',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                SizedBox(
+                  height: 50.0,
+                ),
+                Column(
+                  children: [
+                    TextField(
+                      controller: textEditor,
+                      maxLines: 12,
+                      style: kDefaultTextStyle.copyWith(color: Colors.black54),
+                      keyboardType: TextInputType.multiline,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        hintStyle:
+                            kDefaultTextStyle.copyWith(color: Colors.black54,),
+                        hintText:
+                            'describe your dream job, dream place, your dream everything',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: WidgetStatePropertyAll<Color>(
-                              Color(0xFF5D4037),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll<Color>(
+                                Color(0xFF5D4037),
+                              ),
                             ),
-                          ),
-                          onPressed: () async {
-                            setState(() {
-                              isDone = false;
-                            });
-                            await sendPrompt(
-                                contextString + textEditor.text + closingString);
-                            if (isDone) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => StoryPage(
-                                    prompt: textEditor.text,
-                                    story: generatedText,
+                            onPressed: () async {
+                              setState(() {
+                                isDone = false;
+                              });
+                              await sendPrompt(
+                                  contextString + textEditor.text + closingString);
+                              if (isDone) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => StoryPage(
+                                      prompt: textEditor.text,
+                                      story: generatedText,
+                                    ),
                                   ),
+                                );
+                                textEditor.clear();
+                              }
+                            },
+                            child: (isDone)
+                                ? Text(
+                              'take me there..',
+                              style: kDefaultTextStyle.copyWith(
+                                  color: Colors.white),
+                            )
+                                : Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: SizedBox(
+                                height: 15.0,
+                                width: 15.0,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 4.0,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.white70),
                                 ),
-                              );
-                            }
-                          },
-                          child: (isDone)
-                              ? Text(
-                            'take me there..',
-                            style: kDefaultTextStyle.copyWith(
-                                color: Colors.white),
-                          )
-                              : Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child: SizedBox(
-                              height: 15.0,
-                              width: 15.0,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 4.0,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.white70),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

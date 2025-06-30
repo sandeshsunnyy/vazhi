@@ -20,6 +20,8 @@ class _StoryPageState extends State<StoryPage> {
   String generatedText = "";
 
   bool isDone = true;
+  bool isGenerateDone = true;
+  bool isDialogDone = true;
 
   Future<void> showContents(int fromWhere) async {
     String path = await Provider.of<EssentialData>(context, listen: false).pathsFilePath;
@@ -95,7 +97,10 @@ class _StoryPageState extends State<StoryPage> {
                     children: [
                       ElevatedButton(
                           onPressed: () async {
-                            isDone = false;
+                            setState(() {
+                              isDone = false;
+                              isGenerateDone = false;
+                            });
                             String contextString = "The following is the description of a day in the life of a user's dream future./n";
                             String ending = "/n What i want you to do is analyze the text and suggest 5 tasks to do daily to achieve such a life in the future. The reply should consist of just a string, which could be json decodedable by dart. So just give me a string having key value pairs nested inside curly-braces, nothing more. Don't give me a json object that starts with '''json and ends with '''. It should have a 'path_name' key, which is the name of the path (example: If the story provided describes the life of a mechanical engineer, the path_name has to be a string 'Mechanical Engineer path'), and a key called 'task_list', which should be a list of the daily tasks seperated by a comma. No need to include any pleasantaries. Just the json decodable string has to be the reply. ";
                         await sendPrompt(contextString+widget.story+ending);
@@ -151,11 +156,80 @@ class _StoryPageState extends State<StoryPage> {
                           }
 
                           if(!mounted) return;
-                          Provider.of<EssentialData>(context, listen: false).increamentPathNumber();
-                          Navigator.pop(context);
+                          setState(() {
+                            isGenerateDone = true;
+                            isDialogDone = false;
+
+                          });
+                          if(isGenerateDone){
+                            print('dialog appeeared');
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context){
+                                return AlertDialog(
+                                  backgroundColor: Color(0xFF818C78),
+                                  title: Text('Messege from Tee', style: kDefaultTextStyle.copyWith(color: Colors.black54, fontSize: 20.0),),
+                                  content: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Image.asset(
+                                          'images/tee.png',
+                                          height: 200.0,
+                                          width : 200,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(20.0),
+                                            color: Color(0xFFE2E0C8),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15.0),
+                                            child: Text("Your plan is ready. Head over to the Path Library to find them.\n\nRemember to do this everyday, okay?\n\nYou've got this!!", style: kDefaultTextStyle.copyWith(color: Colors.black54, fontSize: 12.0),),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    ElevatedButton(
+                                      style: ButtonStyle(
+                                        backgroundColor: WidgetStatePropertyAll<Color>(Color(0xffD3D3FF).withAlpha(200),),
+                                      ),
+                                      onPressed: (){
+                                        setState(() {
+                                          isDialogDone = true;
+                                        });
+                                        Navigator.pop(context);
+                                      },
+                                      child: Padding(padding: EdgeInsets.all(5.0),
+                                        child:  Text("Let's go!", style: kDefaultTextStyle.copyWith(color: Colors.black, fontSize: 12.0),),),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            if(isDialogDone){
+                              print('Tee appeared');
+                              Navigator.pop(context);
+                            }
+                          }
                         }
                       },
-                          child: Text('generate daily plans', style: kDefaultTextStyle,),
+                          child: isGenerateDone ? Text('generate daily plan', style: kDefaultTextStyle,) : Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: SizedBox(
+                              height: 15.0,
+                              width: 15.0,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 4.0,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.white70),
+                              ),
+                            ),
+                          ),
                           style: ButtonStyle(
                             backgroundColor: WidgetStatePropertyAll<Color>(Color(0xFF5D4037)),
                           ),
