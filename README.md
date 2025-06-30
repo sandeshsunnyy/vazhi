@@ -1,16 +1,33 @@
-# vazhi
+# 🛣️ Vazhi – Your AI-Powered Path Finder
 
-A new Flutter project.
+**Vazhi** is a cross-platform Flutter app integrated with a FastAPI backend (powered by Google Gemini) to provide smart, conversational responses to user prompts.  
 
-## Getting Started
+Originally conceptualized during a hackathon, Vazhi has now evolved into a fully functional intelligent assistant application with a live backend hosted on Google Cloud Platform.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 📱 Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 🔮 Live Gemini-powered FastAPI backend hosted on GCP
+- 🌐 Cross-platform Flutter frontend
+- 🧠 Intelligent and dynamic response generation
+- 💬 Health-check and robust error handling
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 🚀 Getting Started
+
+### 📱 Flutter Frontend
+
+#### Prerequisites
+
+- Flutter SDK installed
+- Dart installed
+- A valid backend API URL (already deployed on GCP)
+
+#### Setup
+
+```bash
+cd vazhi
+flutter pub get
+
