@@ -49,6 +49,8 @@ That's it!! Now if you want to configure the server by yourself, the code is in 
 
 **Remember to create a .env file and add your own API key.** 
 
+Docker was used for containerization.
+
 Pull requests are welcome! If you’d like to improve the app or add new features, please fork the repository and create a new branch for your changes.
 
 For questions, suggestions, or collaborations, feel free to reach out via GitHub issues or connect directly.
