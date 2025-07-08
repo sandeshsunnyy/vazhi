@@ -11,7 +11,8 @@ You’ve seen (or heard of) “A Day in the Life of” videos and stories, right
 - Live Gemini-powered FastAPI backend hosted on GCP
 - Cross-platform Flutter frontend
 - Intelligent and dynamic story generation
-- Intelligent daily task generation 
+- Intelligent daily task generation
+- No tracking or remote storing of personal data. Everything is handled locally. (JSON files)
 
 ---
 
